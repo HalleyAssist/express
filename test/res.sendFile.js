@@ -659,7 +659,7 @@ describe('res', function(){
 
         request(app)
         .get('/')
-        .expect('Content-Type', 'text/html; charset=UTF-8')
+        .expect('Content-Type', 'text/html; charset=utf-8')
         .expect(200, '<p>{{user.name}}</p>', done);
       })
     })
@@ -674,7 +674,7 @@ describe('res', function(){
 
         request(app)
         .get('/')
-        .expect('Content-Type', 'text/html; charset=UTF-8')
+        .expect('Content-Type', 'text/html; charset=utf-8')
         .expect(200, '<p>{{user.name}}</p>', done);
       })
 
@@ -687,7 +687,7 @@ describe('res', function(){
 
         request(app)
         .get('/')
-        .expect('Content-Type', 'text/html; charset=UTF-8')
+        .expect('Content-Type', 'text/html; charset=utf-8')
         .expect(200, '<p>{{user.name}}</p>', done);
       })
 

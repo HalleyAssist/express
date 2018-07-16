@@ -41,7 +41,7 @@ describe('req.is()', function () {
 
       request(app)
       .post('/')
-      .type('application/json; charset=UTF-8')
+      .type('application/json; charset=utf-8')
       .send('{}')
       .expect(200, '"application/json"', done)
     })
@@ -116,7 +116,7 @@ describe('req.is()', function () {
 
       request(app)
       .post('/')
-      .type('application/json; charset=UTF-8')
+      .type('application/json; charset=utf-8')
       .send('{}')
       .expect(200, '"application/json"', done)
     })
@@ -160,7 +160,7 @@ describe('req.is()', function () {
 
       request(app)
       .post('/')
-      .type('application/json; charset=UTF-8')
+      .type('application/json; charset=utf-8')
       .send('{}')
       .expect(200, '"application/json"', done)
     })

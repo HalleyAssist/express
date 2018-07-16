@@ -15,7 +15,7 @@ describe('res', function(){
 
       request(app)
       .get('/')
-      .expect('Content-Type', 'text/html; charset=UTF-8')
+      .expect('Content-Type', 'text/html; charset=utf-8')
       .expect('Content-Disposition', 'attachment; filename="user.html"')
       .expect(200, '<p>{{user.name}}</p>', done)
     })
@@ -31,7 +31,7 @@ describe('res', function(){
 
       request(app)
       .get('/')
-      .expect('Content-Type', 'text/html; charset=UTF-8')
+      .expect('Content-Type', 'text/html; charset=utf-8')
       .expect('Content-Disposition', 'attachment; filename="document"')
       .expect(200, done)
     })
@@ -48,7 +48,7 @@ describe('res', function(){
 
       request(app)
       .get('/')
-      .expect('Content-Type', 'text/html; charset=UTF-8')
+      .expect('Content-Type', 'text/html; charset=utf-8')
       .expect('Content-Disposition', 'attachment; filename="user.html"')
       .expect(200, cb);
     })
@@ -65,7 +65,7 @@ describe('res', function(){
 
       request(app)
       .get('/')
-      .expect('Content-Type', 'text/html; charset=UTF-8')
+      .expect('Content-Type', 'text/html; charset=utf-8')
       .expect('Content-Disposition', 'attachment; filename="document"')
       .expect(200, cb);
     })
@@ -84,7 +84,7 @@ describe('res', function(){
       request(app)
       .get('/')
       .expect(200)
-      .expect('Content-Type', 'text/html; charset=UTF-8')
+      .expect('Content-Type', 'text/html; charset=utf-8')
       .expect('Content-Disposition', 'attachment; filename="document"')
       .end(cb)
     })
