@@ -3,6 +3,7 @@ var after = require('after');
 var assert = require('assert');
 var express = require('..');
 var request = require('supertest');
+var resolve = require('path').resolve
 
 describe('res', function(){
   describe('.download(path)', function(){
@@ -17,7 +18,8 @@ describe('res', function(){
       .get('/')
       .expect('Content-Type', 'text/html; charset=utf-8')
       .expect('Content-Disposition', 'attachment; filename="user.html"')
-      .expect(200, '<p>{{user.name}}</p>', done)
+      .expect('X-Accel-Redirect', resolve('test/fixtures/user.html'))
+      .expect(200, '', done)
     })
   })
 
@@ -87,100 +89,6 @@ describe('res', function(){
       .expect('Content-Type', 'text/html; charset=utf-8')
       .expect('Content-Disposition', 'attachment; filename="document"')
       .end(cb)
-    })
-
-    it('should allow options to res.sendFile()', function (done) {
-      var app = express()
-
-      app.use(function (req, res) {
-        res.download('test/fixtures/.name', 'document', {
-          dotfiles: 'allow',
-          maxAge: '4h'
-        })
-      })
-
-      request(app)
-      .get('/')
-      .expect(200)
-      .expect('Content-Disposition', 'attachment; filename="document"')
-      .expect('Cache-Control', 'public, max-age=14400')
-      .expect('tobi')
-      .end(done)
-    })
-
-    describe('when options.headers contains Content-Disposition', function () {
-      it('should should be ignored', function (done) {
-        var app = express()
-
-        app.use(function (req, res) {
-          res.download('test/fixtures/user.html', 'document', {
-            headers: {
-              'Content-Type': 'text/x-custom',
-              'Content-Disposition': 'inline'
-            }
-          })
-        })
-
-        request(app)
-        .get('/')
-        .expect(200)
-        .expect('Content-Type', 'text/x-custom')
-        .expect('Content-Disposition', 'attachment; filename="document"')
-        .end(done)
-      })
-
-      it('should should be ignored case-insensitively', function (done) {
-        var app = express()
-
-        app.use(function (req, res) {
-          res.download('test/fixtures/user.html', 'document', {
-            headers: {
-              'content-type': 'text/x-custom',
-              'content-disposition': 'inline'
-            }
-          })
-        })
-
-        request(app)
-        .get('/')
-        .expect(200)
-        .expect('Content-Type', 'text/x-custom')
-        .expect('Content-Disposition', 'attachment; filename="document"')
-        .end(done)
-      })
-    })
-  })
-
-  describe('on failure', function(){
-    it('should invoke the callback', function(done){
-      var app = express();
-
-      app.use(function (req, res, next) {
-        res.download('test/fixtures/foobar.html', function(err){
-          if (!err) return next(new Error('expected error'));
-          res.send('got ' + err.status + ' ' + err.code);
-        });
-      });
-
-      request(app)
-      .get('/')
-      .expect(200, 'got 404 ENOENT', done);
-    })
-
-    it('should remove Content-Disposition', function(done){
-      var app = express()
-
-      app.use(function (req, res, next) {
-        res.download('test/fixtures/foobar.html', function(err){
-          if (!err) return next(new Error('expected error'));
-          res.end('failed');
-        });
-      });
-
-      request(app)
-      .get('/')
-      .expect(shouldNotHaveHeader('Content-Disposition'))
-      .expect(200, 'failed', done);
     })
   })
 })

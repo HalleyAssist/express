@@ -41,7 +41,7 @@ describe('res', function(){
       app.locals.user = { name: 'tobi' }
 
       app.use(function (req, res) {
-        res.render(path.join(__dirname, 'fixtures', 'broken.send'))
+        res.render(path.join(__dirname, 'fixtures', 'broken.after'))
       })
 
       request(app)

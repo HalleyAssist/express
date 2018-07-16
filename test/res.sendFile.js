@@ -24,7 +24,8 @@ describe('res', function(){
 
       request(app)
       .get('/')
-      .expect(200, 'tobi', done);
+      .expect('X-Accel-Redirect', path.resolve(fixtures, 'name.txt'))
+      .expect(200, '', done)
     });
 
     it('should transfer a file with special characters in string', function (done) {
@@ -32,7 +33,8 @@ describe('res', function(){
 
       request(app)
       .get('/')
-      .expect(200, '20%', done);
+      .expect('X-Accel-Redirect', path.resolve(fixtures, '% of dogs.txt'))
+      .expect(200, '', done)
     });
 
     it('should include ETag', function (done) {
@@ -41,7 +43,8 @@ describe('res', function(){
       request(app)
       .get('/')
       .expect('ETag', /^(?:W\/)?"[^"]+"$/)
-      .expect(200, 'tobi', done);
+      .expect('X-Accel-Redirect', path.resolve(fixtures, 'name.txt'))
+      .expect(200, '', done)
     });
 
     it('should 304 when ETag matches', function (done) {
@@ -50,7 +53,7 @@ describe('res', function(){
       request(app)
       .get('/')
       .expect('ETag', /^(?:W\/)?"[^"]+"$/)
-      .expect(200, 'tobi', function (err, res) {
+      .expect(200, '', function (err, res) {
         if (err) return done(err);
         var etag = res.headers.etag;
         request(app)
