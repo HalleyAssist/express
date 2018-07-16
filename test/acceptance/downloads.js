@@ -19,12 +19,4 @@ describe('downloads', function(){
       .expect(200, done)
     })
   })
-
-  describe('GET /files/missing.txt', function(){
-    it('should respond with 404', function(done){
-      request(app)
-      .get('/files/missing.txt')
-      .expect(404, done)
-    })
-  })
 })
