@@ -1,6 +1,5 @@
 
 var after = require('after');
-var assert = require('assert');
 var express = require('..');
 var request = require('supertest');
 var resolve = require('path').resolve
