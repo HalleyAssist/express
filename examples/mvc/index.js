@@ -31,9 +31,6 @@ app.response.message = function(msg){
 // log
 if (!module.parent) app.use(logger('dev'));
 
-// serve static files
-app.use(express.static(path.join(__dirname, 'public')));
-
 // session support
 app.use(session({
   resave: false, // don't save session if unmodified
@@ -72,6 +69,9 @@ app.use(function(req, res, next){
 
 // load controllers
 require('./lib/boot')(app, { verbose: !module.parent });
+
+// serve static files
+app.use(express.static(path.join(__dirname, 'public'), "/_static/"));
 
 app.use(function(err, req, res, next){
   // log it
