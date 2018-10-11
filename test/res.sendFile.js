@@ -1,13 +1,9 @@
 
 var after = require('after');
 var express = require('../')
-  , request = require('supertest')
-  , assert = require('assert');
-var onFinished = require('on-finished');
+  , request = require('supertest');
 var path = require('path');
-var should = require('should');
 var fixtures = path.join(__dirname, 'fixtures');
-var utils = require('./support/utils');
 
 describe('res', function(){
   describe('.sendFile(path)', function () {
