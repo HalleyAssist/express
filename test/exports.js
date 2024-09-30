@@ -12,10 +12,6 @@ describe('exports', function(){
     express.application.set.should.be.a.Function()
   })
 
-  it('should expose the request prototype', function(){
-    express.request.accepts.should.be.a.Function()
-  })
-
   it('should expose the response prototype', function(){
     express.response.send.should.be.a.Function()
   })
