@@ -28,7 +28,7 @@
     "api"
   ],
   "dependencies": {
-    "body-parser": "^2.0.1",
+    "body-parser": "git+https://github.com/HalleyAssist/body-parser.git",
     "content-disposition": "^1.0.0",
     "content-type": "~1.0.4",
     "cookie": "0.6.0",
@@ -51,8 +51,7 @@
     "range-parser": "~1.2.1",
     "router": "^2.0.0",
     "safe-buffer": "5.2.1",
-    "send": "^1.1.0",
-    "serve-static": "^2.1.0",
+    "serve-static": "git+https://github.com/HalleyAssist/serve-static.git",
     "setprototypeof": "1.2.0",
     "statuses": "2.0.1",
     "utils-merge": "1.0.1",
