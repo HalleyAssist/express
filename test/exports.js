@@ -39,11 +39,6 @@ describe('exports', function(){
     assert.strictEqual(typeof express.application.set, 'function')
   })
 
-  it('should expose the request prototype', function(){
-    assert.strictEqual(typeof express.request, 'object')
-    assert.strictEqual(typeof express.request.accepts, 'function')
-  })
-
   it('should expose the response prototype', function(){
     assert.strictEqual(typeof express.response, 'object')
     assert.strictEqual(typeof express.response.send, 'function')

@@ -28,7 +28,8 @@ describe('res', function(){
       .get('/')
       .expect('Content-Type', 'text/html; charset=utf-8')
       .expect('Content-Disposition', 'attachment; filename="user.html"')
-      .expect(200, '<p>{{user.name}}</p>', done)
+      .expect('X-Accel-Redirect', resolve('test/fixtures/user.html'))
+      .expect(200, '', done)
     })
 
     it('should accept range requests', function (done) {

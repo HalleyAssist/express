@@ -29,7 +29,6 @@ if (!module.parent) {
 app.use(methodOverride('_method'));
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }))
-app.use(express.static(path.join(__dirname, 'public')));
 
 // General
 
@@ -47,6 +46,8 @@ app.put('/user/:id/edit', user.update);
 // Posts
 
 app.get('/posts', post.list);
+
+app.use(express.static(path.join(__dirname, 'public'), "/static/"));
 
 /* istanbul ignore next */
 if (!module.parent) {

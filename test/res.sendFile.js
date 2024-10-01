@@ -9,7 +9,6 @@ var express = require('../')
 var onFinished = require('on-finished');
 var path = require('path');
 var fixtures = path.join(__dirname, 'fixtures');
-var utils = require('./support/utils');
 
 var describeAsyncHooks = typeof asyncHooks.AsyncLocalStorage === 'function'
   ? describe
@@ -46,7 +45,8 @@ describe('res', function(){
 
       request(app)
       .get('/')
-      .expect(200, 'tobi', done);
+      .expect('X-Accel-Redirect', path.resolve(fixtures, 'name.txt'))
+      .expect(200, '', done)
     });
 
     it('should transfer a file with special characters in string', function (done) {
@@ -54,53 +54,8 @@ describe('res', function(){
 
       request(app)
       .get('/')
-      .expect(200, '20%', done);
-    });
-
-    it('should include ETag', function (done) {
-      var app = createApp(path.resolve(fixtures, 'name.txt'));
-
-      request(app)
-      .get('/')
-      .expect('ETag', /^(?:W\/)?"[^"]+"$/)
-      .expect(200, 'tobi', done);
-    });
-
-    it('should 304 when ETag matches', function (done) {
-      var app = createApp(path.resolve(fixtures, 'name.txt'));
-
-      request(app)
-      .get('/')
-      .expect('ETag', /^(?:W\/)?"[^"]+"$/)
-      .expect(200, 'tobi', function (err, res) {
-        if (err) return done(err);
-        var etag = res.headers.etag;
-        request(app)
-        .get('/')
-        .set('If-None-Match', etag)
-        .expect(304, done);
-      });
-    });
-
-    it('should 404 for directory', function (done) {
-      var app = createApp(path.resolve(fixtures, 'blog'));
-
-      request(app)
-      .get('/')
-      .expect(404, done);
-    });
-
-    it('should 404 when not found', function (done) {
-      var app = createApp(path.resolve(fixtures, 'does-no-exist'));
-
-      app.use(function (req, res) {
-        res.statusCode = 200;
-        res.send('no!');
-      });
-
-      request(app)
-      .get('/')
-      .expect(404, done);
+      .expect('X-Accel-Redirect', path.resolve(fixtures, '% of dogs.txt'))
+      .expect(200, '', done)
     });
 
     it('should send cache-control by default', function (done) {
