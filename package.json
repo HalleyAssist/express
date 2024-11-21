@@ -49,13 +49,14 @@
     "proxy-addr": "~2.0.7",
     "qs": "6.13.0",
     "range-parser": "~1.2.1",
-    "router": "^2.0.0",
     "safe-buffer": "5.2.1",
     "serve-static": "git+https://github.com/HalleyAssist/serve-static.git",
     "setprototypeof": "1.2.0",
     "statuses": "2.0.1",
     "utils-merge": "1.0.1",
-    "vary": "~1.1.2"
+    "vary": "~1.1.2",
+    "array-flatten": "3.0.0",
+    "is-promise": "4.0.0"
   },
   "devDependencies": {
     "after": "0.8.2",
