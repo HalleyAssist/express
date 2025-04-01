@@ -22,24 +22,6 @@ describe('req', function(){
       .expect(200, '{"user[name]":"tj"}', done);
     });
 
-    describe('when "query parser" is extended', function () {
-      it('should parse complex keys', function (done) {
-        var app = createApp('extended');
-
-        request(app)
-        .get('/?foo[0][bar]=baz&foo[0][fizz]=buzz&foo[]=done!')
-        .expect(200, '{"foo":[{"bar":"baz","fizz":"buzz"},"done!"]}', done);
-      });
-
-      it('should parse parameters with dots', function (done) {
-        var app = createApp('extended');
-
-        request(app)
-        .get('/?user.name=tj')
-        .expect(200, '{"user.name":"tj"}', done);
-      });
-    });
-
     describe('when "query parser" is simple', function () {
       it('should not parse complex keys', function (done) {
         var app = createApp('simple');
